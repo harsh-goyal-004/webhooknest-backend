@@ -23,6 +23,6 @@ public class RequestLog {
     private Map<String,String> requestBody;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @Indexed(expireAfter = "86000")
+    @Indexed(expireAfter = "1d")
     LocalDateTime timestamp;
 }
