@@ -87,4 +87,4 @@ curl -X POST http://localhost:8080/api/bin/abc123 \
 ---
 
 ## Author
-Built with 💻 by Your Name
+Built with 💻 by Harsh Goyal
