@@ -1,11 +1,18 @@
-# Use an official OpenJDK image
-FROM eclipse-temurin:17-jdk-alpine
+# Stage 1: Build jar inside container
+FROM eclipse-temurin:17-jdk-alpine AS builder
 
-# Set working directory
 WORKDIR /app
 
-# Copy the jar file to the container
-COPY target/*.jar app.jar
+# Copy everything and build jar
+COPY . .
 
-# Run the jar
+RUN ./mvnw clean package -DskipTests
+
+# Stage 2: Run the jar
+FROM eclipse-temurin:17-jdk-alpine
+
+WORKDIR /app
+
+COPY --from=builder /app/target/*.jar app.jar
+
 ENTRYPOINT ["java", "-jar", "app.jar"]
