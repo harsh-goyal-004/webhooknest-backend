@@ -1,14 +1,14 @@
-# Stage 1: Build jar inside container
 FROM eclipse-temurin:17-jdk-alpine AS builder
 
 WORKDIR /app
 
-# Copy everything and build jar
 COPY . .
+
+# Add execute permission for mvnw
+RUN chmod +x ./mvnw
 
 RUN ./mvnw clean package -DskipTests
 
-# Stage 2: Run the jar
 FROM eclipse-temurin:17-jdk-alpine
 
 WORKDIR /app
